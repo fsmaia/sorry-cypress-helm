@@ -130,7 +130,7 @@ mongo:
     tag: "4.0"
 
   persistence:
-    enabled: true
+    enabled: false
     accessMode: "ReadWriteOnce"
     size: "1Gi"
 

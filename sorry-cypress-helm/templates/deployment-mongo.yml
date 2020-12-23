@@ -39,5 +39,9 @@ spec:
       serviceAccountName: ""
       volumes:
         - name: mongo-storage
+        {{- if .Values.mongo.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ include "sorry-cypress-helm.fullname" . }}-mongo-storage-claim
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
