@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sorry-cypress-helm.fullname" . }}-director
+spec:
+  replicas: {{ .Values.director.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "sorry-cypress-helm.fullname" . }}-director
+  template:
+    metadata:
+      labels:
+        app: {{ include "sorry-cypress-helm.fullname" . }}-director
+      name: {{ include "sorry-cypress-helm.fullname" . }}-director
+    spec:
+      containers:
+      - env:
+        {{- range .Values.director.ingress.hosts }}
+        - name: director_URL
+          value: {{ .host }}
+        {{- end }}
+        - name: EXECUTION_DRIVER
+          value: ../execution/mongo/driver
+        - name: MONGODB_DATABASE
+          value: sorry-cypress
+        - name: MONGODB_URI
+          value: mongodb://{{ include "sorry-cypress-helm.fullname" . }}-mongo:{{ .Values.mongo.service.port }}
+        - name: SCREENSHOTS_DRIVER
+          value: ../screenshots/s3.driver
+        - name: S3_BUCKET
+          value: {{ .Values.director.s3.bucketName }}
+        - name: S3_REGION
+          value: {{ .Values.director.s3.region }}
+        - name: AWS_ACCESS_KEY_ID
+          value: {{ .Values.director.s3.accessKeyId }}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: {{ .Values.director.s3.secretAccessKey }}
+        image: "{{ .Values.director.image.repository }}:{{ .Values.director.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.director.image.pullPolicy }}
+        name: {{ include "sorry-cypress-helm.fullname" . }}-director
+        ports:
+        - containerPort: 1234
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 1234
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 2
+          failureThreshold: 5
+        resources:
+          {{- toYaml .Values.director.resources | nindent 10 }}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
