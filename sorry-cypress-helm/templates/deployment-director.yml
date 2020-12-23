@@ -20,13 +20,13 @@ spec:
           value: {{ .host }}
         {{- end }}
         - name: EXECUTION_DRIVER
-          value: ../execution/mongo/driver
+          value: {{ .Values.director.environmentVariables.executionDriver }}
         - name: MONGODB_DATABASE
-          value: sorry-cypress
+          value: {{ .Values.director.environmentVariables.mongodbDatabase }}
         - name: MONGODB_URI
           value: mongodb://{{ include "sorry-cypress-helm.fullname" . }}-mongo:{{ .Values.mongo.service.port }}
         - name: SCREENSHOTS_DRIVER
-          value: ../screenshots/s3.driver
+          value: {{ .Values.director.environmentVariables.screenshotsDriver }}
         - name: S3_BUCKET
           value: {{ .Values.director.s3.bucketName }}
         - name: S3_REGION

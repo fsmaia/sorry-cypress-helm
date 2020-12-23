@@ -99,6 +99,11 @@ director:
     #   cpu: 100m
     #   memory: 128Mi
 
+  environmentVariables:
+    executionDriver: "../execution/mongo/driver"
+    mongodbDatabase: sorry-cypress
+    screenshotsDriver: "../screenshots/s3.driver"
+
   s3:
     bucketName: example-bucket
     region: us-east-1
