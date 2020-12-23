@@ -21,6 +21,10 @@ spec:
         - name: GRAPHQL_SCHEMA_URL
           value: {{ .host }}
         {{- end }}
+        {{- if .Values.dashboard.environmentVariables.ciUrl }}
+        - name: CI_URL
+          value: {{ .Values.dashboard.environmentVariables.ciUrl | quote }}
+        {{- end }}
         image: "{{ .Values.dashboard.image.repository }}:{{ .Values.dashboard.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.dashboard.image.pullPolicy }}
         name: {{ include "sorry-cypress-helm.fullname" . }}-dashboard
