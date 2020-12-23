@@ -19,6 +19,8 @@ spec:
         - name: director_URL
           value: {{ .host }}
         {{- end }}
+        - name: ALLOWED_KEYS
+          value: {{ .Values.director.environmentVariables.allowedKeys }}
         - name: EXECUTION_DRIVER
           value: {{ .Values.director.environmentVariables.executionDriver }}
         - name: MONGODB_DATABASE
