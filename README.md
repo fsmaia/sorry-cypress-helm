@@ -1,6 +1,15 @@
 # sorry-cypress-helm
+
 A helm chart for [Sorry Cypress](https://github.com/sorry-cypress/sorry-cypress)
 
-There's no hosted repo for this yet, so you'll have to clone and bake your own.
+There's no hosted repo for this yet, so you'll have to clone and bake your own:
 
-Despite there being an option to turn them off, ingresses are mandatory because they have to be passed through as variables to the varying containers in the stack.
+    git clone https://github.com/tico24/sorry-cypress-helm.git
+    cd sorry-cypress-helm
+    helm install soz-cypress-test sorry-cypress-helm --dry-run --debug
+
+When you're comfortable, you can ditch the dry-run and the debug.
+
+## Things to be aware of:
+
+Despite there being an option to turn them off, ingresses are mandatory because they have to be passed through as variables to the varying containers in the stack. Expect things to fail horribly if you don't set these.
