@@ -103,10 +103,16 @@ director:
     # Ignored if mongo.environmentVariables.executionDriver is set to "../execution/in-memory"
     mongodbDatabase: sorry-cypress
 
-    screenshotsDriver: "../screenshots/s3.driver"
+    # Dummy or S3
+      # Valid options are:
+      # "../screenshots/dummy.driver"
+      # "../screenshots/s3.driver"
+    screenshotsDriver: "../screenshots/dummy.driver"
+
     allowedKeys: ""
 
   s3:
+    # Ignored if mongo.environmentVariables.screenshotsDriver is set to "../screenshots/dummy.driver"
     bucketName: example-bucket
     region: us-east-1
     accessKeyId: abc

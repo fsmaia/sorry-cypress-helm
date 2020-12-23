@@ -31,6 +31,7 @@ spec:
         {{- end }}
         - name: SCREENSHOTS_DRIVER
           value: {{ .Values.director.environmentVariables.screenshotsDriver }}
+        {{- if eq .Values.director.environmentVariables.screenshotsDriver "../screenshots/s3.driver" }}
         - name: S3_BUCKET
           value: {{ .Values.director.s3.bucketName }}
         - name: S3_REGION
@@ -42,6 +43,7 @@ spec:
             secretKeyRef:
               name: {{ include "sorry-cypress-helm.fullname" . }}-s3Secrets
               key: AWS_SECRET_ACCESS_KEY
+        {{- end }}
         image: "{{ .Values.director.image.repository }}:{{ .Values.director.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.director.image.pullPolicy }}
         name: {{ include "sorry-cypress-helm.fullname" . }}-director
