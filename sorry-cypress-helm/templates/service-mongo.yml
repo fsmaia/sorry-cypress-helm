@@ -1,3 +1,4 @@
+{{- if .Values.mongo.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,3 +10,4 @@ spec:
     targetPort: {{ .Values.mongo.service.port }}
   selector:
     app: {{ include "sorry-cypress-helm.fullname" . }}-mongo
+{{- end }}

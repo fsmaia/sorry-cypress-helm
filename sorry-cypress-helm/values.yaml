@@ -94,8 +94,15 @@ director:
     #   memory: 128Mi
 
   environmentVariables:
-    executionDriver: "../execution/mongo/driver"
+    # In memory, or Mongo.
+      # Valid options are:
+      # "../execution/in-memory"
+      # "../execution/mongo/driver"
+    executionDriver: "../execution/in-memory"
+
+    # Ignored if mongo.environmentVariables.executionDriver is set to "../execution/in-memory"
     mongodbDatabase: sorry-cypress
+
     screenshotsDriver: "../screenshots/s3.driver"
     allowedKeys: ""
 
@@ -122,6 +129,8 @@ director:
     #      - chart-example.local
 
 mongo:
+  enabled: false
+
   image:
     repository: mongo
     pullPolicy: Always

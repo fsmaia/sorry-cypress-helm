@@ -23,10 +23,12 @@ spec:
           value: {{ .Values.director.environmentVariables.allowedKeys }}
         - name: EXECUTION_DRIVER
           value: {{ .Values.director.environmentVariables.executionDriver }}
+        {{- if eq .Values.director.environmentVariables.executionDriver "../execution/mongo/driver" }}
         - name: MONGODB_DATABASE
           value: {{ .Values.director.environmentVariables.mongodbDatabase }}
         - name: MONGODB_URI
           value: mongodb://{{ include "sorry-cypress-helm.fullname" . }}-mongo:{{ .Values.mongo.service.port }}
+        {{- end }}
         - name: SCREENSHOTS_DRIVER
           value: {{ .Values.director.environmentVariables.screenshotsDriver }}
         - name: S3_BUCKET
