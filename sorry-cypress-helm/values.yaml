@@ -3,8 +3,6 @@
 # Declare variables to be passed into your templates.
 
 api:
-  replicaCount: 1
-
   image:
     repository: agoldis/sorry-cypress-api
     pullPolicy: Always
@@ -41,8 +39,6 @@ api:
 
 
 dashboard:
-  replicaCount: 1
-
   image:
     repository: agoldis/sorry-cypress-dashboard
     pullPolicy: Always
@@ -79,8 +75,6 @@ dashboard:
 
 
 director:
-  replicaCount: 1
-
   image:
     repository: agoldis/sorry-cypress-director
     pullPolicy: Always
@@ -127,8 +121,6 @@ director:
     #      - chart-example.local
 
 mongo:
-  replicaCount: 1
-
   image:
     repository: mongo
     pullPolicy: Always

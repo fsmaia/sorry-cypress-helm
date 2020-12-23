@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "sorry-cypress-helm.fullname" . }}-director
 spec:
-  replicas: {{ .Values.director.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ include "sorry-cypress-helm.fullname" . }}-director
