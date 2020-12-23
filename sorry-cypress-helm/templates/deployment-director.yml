@@ -34,7 +34,10 @@ spec:
         - name: AWS_ACCESS_KEY_ID
           value: {{ .Values.director.s3.accessKeyId }}
         - name: AWS_SECRET_ACCESS_KEY
-          value: {{ .Values.director.s3.secretAccessKey }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "sorry-cypress-helm.fullname" . }}-s3Secrets
+              key: AWS_SECRET_ACCESS_KEY
         image: "{{ .Values.director.image.repository }}:{{ .Values.director.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.director.image.pullPolicy }}
         name: {{ include "sorry-cypress-helm.fullname" . }}-director

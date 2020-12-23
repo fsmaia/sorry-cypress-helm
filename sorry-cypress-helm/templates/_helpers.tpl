@@ -60,3 +60,12 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the s3 secret
+*/}}
+{{- define "s3SecretAccessKey" }}
+{{- with .Values.director.s3 }}
+{{- printf .secretAccessKey | b64enc -}}
+{{- end }}
+{{- end }}
