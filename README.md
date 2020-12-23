@@ -2,10 +2,27 @@
 
 A helm chart for [Sorry Cypress](https://github.com/sorry-cypress/sorry-cypress)
 
-There's no hosted repo for this yet, so you'll have to clone and bake your own:
+## Installing
 
-    git clone https://github.com/tico24/sorry-cypress-helm.git
-    cd sorry-cypress-helm
-    helm install soz-cypress-test sorry-cypress-helm --dry-run --debug
+Install the chart using:
 
-When you're comfortable, you can ditch the dry-run and the debug.
+```bash
+$ helm repo add sorry-cypress https://tico24.github.io/sorry-cypress-helm/
+$ helm install my-release sorry-cypress/sorry-cypress
+```
+
+## Upgrading
+
+Upgrade the chart deployment using:
+
+```bash
+$ helm upgrade my-release sorry-cypress/sorry-cypress
+```
+
+## Uninstalling
+
+Uninstall the my-release deployment using:
+
+```bash
+$ helm uninstall my-release
+```
